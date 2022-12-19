@@ -29,7 +29,7 @@ public class MovieCatalogResource {
 
 
         //get all rated movie ID's
-        UserRating ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId,
+        UserRating ratings = restTemplate.getForObject("http://rating-data-service/ratingsdata/users/" + userId,
                 UserRating.class);
 
         return ratings
@@ -38,7 +38,7 @@ public class MovieCatalogResource {
                 .map(rating -> {
                     //Rest Template way
                     //for each movie ID, call movie info service get details
-                    Movie movie = restTemplate.getForObject("http://localhost:8082/movies/" + rating.getMovieId(), Movie.class);
+                    Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
 
                     //Put them all together
                     return new CatalogItem(movie.getName(), "War happens between good robots and bad robots", rating.getRating());

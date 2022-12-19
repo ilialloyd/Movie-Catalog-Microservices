@@ -2,6 +2,7 @@ package com.ilialloyd.moviecatalogservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -10,6 +11,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class MovieCatalogServiceApplication {
 
 	@Bean
+	@LoadBalanced
+	//@LoadBalanced   -help to service discovery, it will not call directly, instead will ask eureka server to call
 	public RestTemplate getRestTemplate(){
 		return new RestTemplate();
 	}
